@@ -1,7 +1,7 @@
 'use strict';
 class Node {
-  constructor(val) {
-    this.val = val;
+  constructor(value) {
+    this.value = value;
     this.next = null;
   }
 }
@@ -11,9 +11,9 @@ class SinglyLinkedList {
     this.tail = null;
     this.length = 0;
   }
-  push(val) {
-    if (!val) return;
-    let node = new Node(val);
+  push(value) {
+    if (!value) return;
+    let node = new Node(value);
     if (!this.head) {
       this.head = node;
       this.tail = node;
@@ -22,6 +22,96 @@ class SinglyLinkedList {
       this.tail = node;
     }
     this.length += 1;
+    return this;
+  }
+  pop() {
+    if (!this.head) return undefined;
+    let preNode = this.head;
+    let head = this.head;
+    for (let i = 0; i <= this.length; i++) {
+      if (head.next !== null) {
+        preNode = head;
+        head = preNode.next;
+      } else {
+        if (!preNode.next) {
+          this.head = null;
+          this.tail = null;
+          this.length = 0;
+        } else {
+          preNode.next = null;
+          this.tail = preNode;
+          this.length -= 1;
+        }
+      }
+    }
+    return head;
+  }
+  shift() {
+    if (!this.head) return undefined;
+    let currentHead = this.head;
+    this.head = currentHead.next;
+    this.length -= 1;
+    if (this.length === 0) this.tail = null;
+    return currentHead;
+  }
+  unshift(value) {
+    if (!value) return;
+    let newHead = new Node(value);
+    if (this.length === 0) {
+      this.head = newHead;
+      this.tail = this.head;
+    } else {
+      newHead.next = this.head;
+      this.head = newHead;
+    }
+    this.length += 1;
+    return this;
+  }
+  get(index) {
+    if (index < 0 || index >= this.length) return null;
+    let node = this.head;
+    for (let i = 0; i < index; i++) {
+      node = node.next;
+    }
+    return node;
+  }
+  set(index, value) {
+    let foundNode = this.get(index);
+    if (foundNode) {
+      foundNode.value = value;
+      return true;
+    }
+    return false;
+  }
+  insert(index, value) {
+    if (index < 0 || index > this.length) return false;
+    if (index === 0) {
+      this.unshift(value);
+    } else if (index === this.length) {
+      this.push(value);
+    } else {
+      let preNode = this.get(index - 1);
+      let currentNode = preNode.next;
+      preNode.next = new Node(value);
+      preNode.next.next = currentNode;
+      this.length += 1;
+    }
+    return true;
+  }
+
+  remove(index) {
+    if (index < 0 || index >= this.length) return false;
+    if (index === 0) {
+      this.head = this.head.next;
+      this.length -= 1;
+    } else if (index === this.length - 1) {
+      this.pop();
+    } else {
+      let preNode = this.get(index - 1);
+      preNode = preNode.next;
+      this.length -= 1;
+    }
+    return true;
   }
 }
 
@@ -29,4 +119,13 @@ let slc = new SinglyLinkedList();
 slc.push(1);
 slc.push(2);
 slc.push(3);
-console.log(slc[3]);
+//console.log(slc.insert(3, 20));
+//console.log(`${slc.head.value} : ${slc.head.next.value} : ${slc.head.next.next.value}: ${slc.tail.value}`);
+// console.log(slc.shift());
+//slc.unshift(5);
+// console.log(slc.head);
+//console.log(`${slc.head.value} : ${slc.head.next.value} : ${slc.tail.value}`);
+//slc.set(4, 20);
+console.log(slc.remove(3));
+//console.log(slc.pop(), slc.pop(),slc.pop());
+console.log(slc.length);
