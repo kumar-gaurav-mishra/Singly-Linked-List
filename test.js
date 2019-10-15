@@ -26,6 +26,7 @@ describe('Singly Linked List', () => {
       list.push(10);
       list.length.should.be.equals(6);
       list.get(5).value.should.be.equals(10);
+      (list.push() === null).should.be.equals(true);
     });
     it('Pop Method', () => {
       list.length.should.be.equals(5);
@@ -33,6 +34,10 @@ describe('Singly Linked List', () => {
       list.pop();
       list.length.should.be.equals(4);
       (list.get(4) === null).should.be.equals(true);
+      let tempList = new SinglyLinkedList();
+      tempList.push(1);
+      tempList.pop();
+      (tempList.pop() === undefined).should.be.equals(true);
     });
     it('Shift Method', () => {
       list.length.should.be.equals(5);
@@ -40,6 +45,10 @@ describe('Singly Linked List', () => {
       list.shift();
       list.length.should.be.equals(4);
       list.get(0).value.should.be.equals(2);
+      let tempList = new SinglyLinkedList();
+      (tempList.shift() === undefined).should.be.equals(true);
+      tempList.push(1);
+      tempList.shift().value.should.be.equals(1);
     });
     it('unShift Method', () => {
       list.length.should.be.equals(5);
@@ -47,6 +56,9 @@ describe('Singly Linked List', () => {
       list.unShift(10);
       list.length.should.be.equals(6);
       list.get(0).value.should.be.equals(10);
+      (list.unShift() === undefined).should.be.equals(true);
+      let tempList = new SinglyLinkedList();
+      (tempList.unShift(5).head.value === 5).should.be.equals(true);
     });
     it('Insert Method', () => {
       list.length.should.be.equals(5);
@@ -54,6 +66,9 @@ describe('Singly Linked List', () => {
       list.insert(0, 10);
       list.length.should.be.equals(6);
       list.get(0).value.should.be.equals(10);
+      (list.insert(-1, 20) === false).should.be.equals(true);
+      (list.insert(6, 20) === true).should.be.equals(true);
+      (list.insert(2, 15) === true).should.be.equals(true);
     });
     it('Set Method', () => {
       list.length.should.be.equals(5);
@@ -61,6 +76,7 @@ describe('Singly Linked List', () => {
       list.set(0, 10);
       list.length.should.be.equals(5);
       list.get(0).value.should.be.equals(10);
+      (list.set(10, 20) === false).should.be.equals(true);
     });
     it('remove Method', () => {
       list.length.should.be.equals(5);
@@ -68,6 +84,13 @@ describe('Singly Linked List', () => {
       list.remove(0);
       list.length.should.be.equals(4);
       list.get(0).value.should.be.equals(2);
+      (list.remove(-1) === undefined).should.be.equals(true);
+      (list.remove(0).value === 2).should.be.equals(true);
+      (list.remove(2).value === 5).should.be.equals(true);
+      list.push(10);
+      list.push(20);
+      list.push(40);
+      (list.remove(1).value === 4).should.be.equals(true);
     });
     it('reverse Method', () => {
       list.reverse();
@@ -77,6 +100,9 @@ describe('Singly Linked List', () => {
       list.get(2).value.should.be.equals(3);
       list.get(3).value.should.be.equals(2);
       list.get(4).value.should.be.equals(1);
+      let tempList = new SinglyLinkedList();
+      tempList.push(1);
+      tempList.reverse();
     });
   });
 });

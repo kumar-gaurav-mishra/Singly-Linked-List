@@ -12,7 +12,7 @@ class SinglyLinkedList {
     this.length = 0;
   }
   push(value) {
-    if (!value) return;
+    if (!value) return null;
     let node = new Node(value);
     if (!this.head) {
       this.head = node;
@@ -55,7 +55,7 @@ class SinglyLinkedList {
     return currentHead;
   }
   unShift(value) {
-    if (!value) return;
+    if (!value) return undefined;
     let newHead = new Node(value);
     if (this.length === 0) {
       this.head = newHead;
