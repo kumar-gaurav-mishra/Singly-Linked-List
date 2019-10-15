@@ -54,7 +54,7 @@ class SinglyLinkedList {
     if (this.length === 0) this.tail = null;
     return currentHead;
   }
-  unshift(value) {
+  unShift(value) {
     if (!value) return;
     let newHead = new Node(value);
     if (this.length === 0) {
@@ -86,7 +86,7 @@ class SinglyLinkedList {
   insert(index, value) {
     if (index < 0 || index > this.length) return false;
     if (index === 0) {
-      this.unshift(value);
+      this.unShift(value);
     } else if (index === this.length) {
       this.push(value);
     } else {
@@ -98,34 +98,35 @@ class SinglyLinkedList {
     }
     return true;
   }
-
   remove(index) {
-    if (index < 0 || index >= this.length) return false;
+    if (index < 0 || index >= this.length) return undefined;
     if (index === 0) {
-      this.head = this.head.next;
-      this.length -= 1;
+      return this.shift();
     } else if (index === this.length - 1) {
-      this.pop();
+      return this.pop();
     } else {
       let preNode = this.get(index - 1);
-      preNode = preNode.next;
+      let removed = preNode.next;
+      preNode.next = removed.next;
       this.length -= 1;
+      return removed;
     }
-    return true;
+  }
+  reverse() {
+    if (this.length <= 1) return this;
+    let node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+    let next,
+      prev = null;
+    for (let i = 0; i < this.length; i++) {
+      next = node.next;
+      node.next = prev;
+      prev = node;
+      node = next;
+    }
+    return this;
   }
 }
 
-let slc = new SinglyLinkedList();
-slc.push(1);
-slc.push(2);
-slc.push(3);
-//console.log(slc.insert(3, 20));
-//console.log(`${slc.head.value} : ${slc.head.next.value} : ${slc.head.next.next.value}: ${slc.tail.value}`);
-// console.log(slc.shift());
-//slc.unshift(5);
-// console.log(slc.head);
-//console.log(`${slc.head.value} : ${slc.head.next.value} : ${slc.tail.value}`);
-//slc.set(4, 20);
-console.log(slc.remove(3));
-//console.log(slc.pop(), slc.pop(),slc.pop());
-console.log(slc.length);
+module.exports = SinglyLinkedList;
