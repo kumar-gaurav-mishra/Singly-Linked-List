@@ -1,6 +1,6 @@
 {
-  "name": "@kumarx/singly-linked-list",
-  "version": "1.0.0",
+  "name": "js-singly-linked-list",
+  "version": "1.0.1",
   "description": "Singly Linked List Implemented in Javascript",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,10 @@
     "singly",
     "linked",
     "list",
-    "javascript"
+    "javascript",
+    "singly linked list",
+    "singly-linked-list",
+    "js-singly-link-list"
   ],
   "author": "Kumar Gaurav Mishra",
   "license": "MIT",

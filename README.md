@@ -6,12 +6,13 @@ Javascript Implementation of Singly Linked List
 
 ```Installation
 
-npm install @kumarx/singly-linked-list
+npm install js-singly-linked-list
 
 ```
+
 ```Javascript
 
- const SinglyLinkedList = require('@kumarx/singly-linked-list');
+ const SinglyLinkedList = require('js-singly-linked-list');
  let list = new SinglyLinkedList();
 
  list.push(1); //Pushes value to the list
